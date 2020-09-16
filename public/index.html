@@ -52,6 +52,29 @@
           });
         });
       }
+
+
+  function openDatabase () {
+    const request = window.indexedDB.open("budgets", 1);
+
+    request.onerror = error => {
+      console.error('IndexDB error:', error)
+    }
+
+   request.onupgradeneeded = function () {
+     // This should only executes if there's a need to create/update db.
+     this.result.createObjectStore('budget_requests', {
+      autoIncrement:  true, keyPath: 'id' })
+   }
+
+    // This will execute each time the database is opened.
+    request.onsuccess = function () {
+    my_db = this.result
+    }
+  }
+
+  let my_db;
+  openDatabase();
   </script>
 </body>
 </html>
