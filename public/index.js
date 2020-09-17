@@ -99,6 +99,14 @@ function sendTransaction(isAdding) {
     date: new Date().toISOString()
   };
 
+  // add data to service-worker.js
+  // send message to service worker via postMessage
+  let msg = {
+    'form_data': transaction
+  }
+  navigator.serviceWorker.controller.postMessage(msg)
+  // This sends our data to service-worker.js
+
   // if subtracting funds, convert amount to negative number
   if (!isAdding) {
     transaction.value *= -1;
