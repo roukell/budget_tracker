@@ -13,11 +13,7 @@ request.onsuccess = function(event) {
 
   // check if app is online before reading from db
   if (navigator.onLine) {
-    console.log('online send data to MongoDB');
-  } else {
-    //if offline send data to indexedDB
     checkDatabase();
-    console.log('offline send data to indexedDB');
   }
 };
 
@@ -70,4 +66,4 @@ function checkDatabase() {
 }
 
 // listen for app coming back online
-window.addEventListener("offline", checkDatabase);
+window.addEventListener("online", checkDatabase);

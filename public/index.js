@@ -101,11 +101,11 @@ function sendTransaction(isAdding) {
 
   // add data to service-worker.js
   // send message to service worker via postMessage
-  let msg = {
-    'form_data': transaction
-  }
-  navigator.serviceWorker.controller.postMessage(msg)
-  // This sends our data to service-worker.js
+  // let msg = {
+  //   'form_data': transaction
+  // }
+  // navigator.serviceWorker.controller.postMessage(msg)
+  // // This sends our data to service-worker.js
 
   // if subtracting funds, convert amount to negative number
   if (!isAdding) {
@@ -129,7 +129,8 @@ function sendTransaction(isAdding) {
       "Content-Type": "application/json"
     }
   })
-  .then(response => {    
+  .then(response => {  
+    console.log(navigator.onLine);  
     return response.json();
   })
   .then(data => {
@@ -144,6 +145,7 @@ function sendTransaction(isAdding) {
   })
   .catch(err => {
     // fetch failed, so save in indexed db
+    console.log(navigator.onLine);
     saveRecord(transaction);
 
     // clear form
