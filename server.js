@@ -22,7 +22,7 @@ app.use(express.static("public"));
 //   useFindAndModify: false
 // });
 
-mongoose.connect(uri);
+mongoose.connect(process.env.URI);
 
 // routes
 app.use(require("./routes/api.js"));
